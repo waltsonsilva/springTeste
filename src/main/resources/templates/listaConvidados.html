@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset = "UTF-8"/>
+	<meta name= "viewport" content ="width-content-width"/>
+	
+	<title>Festa</title>
+	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista de Convidados</h1>
+		</div>
+		<div class="panel-body">
+		<form class="form-inline" method="post" th:object="${convidado}" th:action="@{/convidados}" style="margin: 20px 0">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" id="idNome"/>
+				<input type="text" calss="form-control" placeholder="Acompanhantes" th:field="*{quantidadeAcompanhantes}"/>
+				<button type="submit" class="btn btn-primary" onclick = "valida()">Adicionar</button>
+			</div>
+		</form>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Acompanhantes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="convidado: ${convidados}">
+						<td th:text="${convidado.nome}"></td>
+						<td th:text="${convidado.quantidadeAcompanhantes}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>	
+</html>
+<script>
+function valida(){
+	var nome = document.getElementById("idNome");
+	if(nome == null || nome == "")
+		alert("Preencher nome" + nome)
+}
+
+</script>
